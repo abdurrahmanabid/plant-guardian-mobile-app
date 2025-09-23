@@ -4,7 +4,7 @@
     "slug": "plant-guardian-app",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": ".src/assets/images/logo.png",
+    "icon": "./src/assets/images/logo.png",
     "scheme": "plantguardianapp",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
@@ -13,25 +13,25 @@
     },
     "android": {
       "adaptiveIcon": {
-        "backgroundColor": "#000000",
-        "foregroundImage": ".src/assets/images/logo.png"
+        "backgroundColor": "#08011f",
+        "foregroundImage": "./src/assets/images/logo.png"
       },
       "edgeToEdgeEnabled": true
     },
     "web": {
       "bundler": "metro",
       "output": "static",
-      "favicon": ".src/assets/images/logo.png"
+      "favicon": "./src/assets/images/logo.png"
     },
     "plugins": [
       "expo-router",
       [
         "expo-splash-screen",
         {
-          "image": ".src/assets/images/logo.png",
+          "image": "./src/assets/images/logo.png",
           "imageWidth": 200,
           "resizeMode": "contain",
-          "backgroundColor": "#000000"
+          "backgroundColor": "#08011f"
         }
       ]
     ],
