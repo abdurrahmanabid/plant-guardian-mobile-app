@@ -1,0 +1,40 @@
+{
+  "profile": {
+    "title": "Profile",
+    "createProfile": "Create Profile",
+    "editProfile": "Edit Profile",
+    "fullName": "Full Name",
+    "email": "Email",
+    "phone": "Phone Number",
+    "address": "Address",
+    "save": "Save",
+    "update": "Update",
+    "profileCreated": "Profile created successfully",
+    "profileUpdated": "Profile updated successfully",
+    "noProfile": {
+      "title": "No Profile",
+      "message": "You haven't created a profile yet.",
+      "createNow": "Create Now"
+    }
+  },
+  "auth": {
+    "signup": {
+      "title": "Sign Up",
+      "button": "Sign Up",
+      "haveAccount": "Already have an account?",
+      "loginHere": "Login here"
+    },
+    "signin": {
+      "title": "Sign In",
+      "button": "Sign In",
+      "noAccount": "Don't have an account?",
+      "registerHere": "Register here"
+    }
+  },
+  "language": {
+    "switch": "Switch Language",
+    "bn": "Bengali",
+    "en": "English",
+    "current": "Current language: English"
+  }
+}

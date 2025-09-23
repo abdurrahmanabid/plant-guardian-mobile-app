@@ -1,3 +1,21 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+@layer base {
+    body {
+      @apply font-sans; /* This will apply Hind Siliguri to everything */
+    }
+  }
+
+  @font-face {
+    font-family: "HindSiliguri";
+    src: url("../assets/fonts/HindSiliguri-Regular.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+
+  }
+.f {
+  @apply font-sans; /* This will apply Hind Siliguri to everything */
+}

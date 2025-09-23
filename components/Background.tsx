@@ -12,7 +12,7 @@ const Background = ({ children }: BackgroundProps) => {
         className="absolute w-full z-0"
         resizeMode="cover"
       />
-      <View className="p-4">{children}</View>
+      <View className="p-4 flex-1">{children}</View>
     </View>
   );
 };

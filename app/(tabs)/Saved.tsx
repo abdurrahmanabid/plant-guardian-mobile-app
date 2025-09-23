@@ -1,11 +1,16 @@
+import Section from '@/components/Section'
 import React from 'react'
-import { Text, View } from 'react-native'
+import { useTranslation } from 'react-i18next'
 
 const Saved = () => {
+  const { t } = useTranslation('saved')
   return (
-    <View>
-      <Text>Saved</Text>
-    </View>
+    <Section
+      title={t('left-title')}
+      text={t('left-text')}
+      info={t('right-text')}
+      cta={t('right-button')}
+    />
   )
 }
 

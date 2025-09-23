@@ -1,4 +1,5 @@
 import { Tabs } from "expo-router";
+import { useTranslation } from "react-i18next";
 import { Image, ImageBackground, Text, View } from "react-native";
 
 import { icons } from "@/src/constants/icons";
@@ -12,7 +13,7 @@ function TabIcon({ focused, icon, title }: any) {
         className="flex flex-row w-full flex-1 min-w-[112px] min-h-14 mt-4 justify-center items-center rounded-full overflow-hidden"
       >
         <Image source={icon} tintColor="#151312" className="size-5" />
-        <Text className="text-secondary text-base font-semibold ml-2">
+        <Text className="text-secondary text-base font-semibold ml-2" style={{ fontFamily: "HindSiliguri_600SemiBold" }}>
           {title}
         </Text>
       </ImageBackground>
@@ -27,10 +28,13 @@ function TabIcon({ focused, icon, title }: any) {
 }
 
 export default function TabsLayout() {
+  const { t } = useTranslation();
   return (
     <Tabs
       screenOptions={{
         tabBarShowLabel: false,
+        headerTitleStyle: { fontFamily: "HindSiliguri_600SemiBold" },
+        tabBarLabelStyle: { fontFamily: "HindSiliguri_500Medium" },
         tabBarItemStyle: {
           width: "100%",
           height: "100%",
@@ -53,10 +57,10 @@ export default function TabsLayout() {
       <Tabs.Screen
         name="index"
         options={{
-          title: "index",
+          title: t("home"),
           headerShown: false,
           tabBarIcon: ({ focused }) => (
-            <TabIcon focused={focused} icon={icons.home} title="Home" />
+            <TabIcon focused={focused} icon={icons.home} title={t("home")} />
           ),
         }}
       />
@@ -64,10 +68,10 @@ export default function TabsLayout() {
       <Tabs.Screen
         name="Search"
         options={{
-          title: "Search",
+          title: t("search"),
           headerShown: false,
           tabBarIcon: ({ focused }) => (
-            <TabIcon focused={focused} icon={icons.search} title="Search" />
+            <TabIcon focused={focused} icon={icons.search} title={t("search")} />
           ),
         }}
       />
@@ -75,10 +79,10 @@ export default function TabsLayout() {
       <Tabs.Screen
         name="Saved"
         options={{
-          title: "Save",
+          title: t("saved"),
           headerShown: false,
           tabBarIcon: ({ focused }) => (
-            <TabIcon focused={focused} icon={icons.save} title="Save" />
+            <TabIcon focused={focused} icon={icons.save} title={t("saved")} />
           ),
         }}
       />
@@ -86,10 +90,10 @@ export default function TabsLayout() {
       <Tabs.Screen
         name="Profile"
         options={{
-          title: "Profile",
+          title: t("profile"),
           headerShown: false,
           tabBarIcon: ({ focused }) => (
-            <TabIcon focused={focused} icon={icons.person} title="Profile" />
+            <TabIcon focused={focused} icon={icons.person} title={t("profile")} />
           ),
         }}
       />

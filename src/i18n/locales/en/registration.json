@@ -1,0 +1,52 @@
+{
+  "title": "Create your account",
+  "subtitle": "Fill in your information to get started.",
+  "fields": {
+    "name": "Full name",
+    "email": "Email",
+    "phone": "Phone (optional)",
+    "password": "Password",
+    "role": "Role",
+    "address": {
+      "street": "Street",
+      "city": "City",
+      "state": "State"
+    }
+  },
+  "placeholders": {
+    "name": "e.g., Anika Rahman",
+    "email": "you@example.com",
+    "phone": "+8801XXXXXXXXX",
+    "password": "Minimum 6 characters",
+    "address": {
+      "street": "House/Road",
+      "city": "City name",
+      "state": "State/Division"
+    }
+  },
+  "roles": {
+    "Doctor": "Doctor",
+    "Farmer": "Farmer"
+  },
+  "buttons": {
+    "submit": "Register",
+    "submitting": "Registering..."
+  },
+  "modal": {
+    "title": "Registration"
+  },
+  "success": {
+    "default": "Welcome, {{name}}! Your account has been created."
+  },
+  "errors": {
+    "server": "Something went wrong. Please try again.",
+    "name": "Name is required.",
+    "phone": "Enter a valid phone number.",
+    "password": "Password must be at least 6 characters.",
+    "role": "Please choose a role.",
+    "email": {
+      "required": "Email is required.",
+      "format": "Enter a valid email address."
+    }
+  }
+}

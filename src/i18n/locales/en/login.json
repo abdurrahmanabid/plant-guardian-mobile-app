@@ -1,0 +1,39 @@
+{
+  "title": "Welcome back",
+  "subtitle": "Log in to continue.",
+  "fields": {
+    "email": "Email",
+    "password": "Password",
+    "remember": "Remember me"
+  },
+  "placeholders": {
+    "email": "you@example.com",
+    "password": "Your password"
+  },
+  "buttons": {
+    "submit": "Log in",
+    "submitting": "Logging in..."
+  },
+  "links": {
+    "forgot": "Forgot password?",
+    "noAccount": "Don't have an account?",
+    "register": "Create one"
+  },
+  "modal": {
+    "title": "Login"
+  },
+  "success": {
+    "default": "Logged in successfully."
+  },
+  "errors": {
+    "server": "Something went wrong. Please try again.",
+    "invalid": "Invalid email or password.",
+    "email": {
+      "required": "Email is required.",
+      "format": "Enter a valid email address."
+    },
+    "password": {
+      "required": "Password is required."
+    }
+  }
+}
