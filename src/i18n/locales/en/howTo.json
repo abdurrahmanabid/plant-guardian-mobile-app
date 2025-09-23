@@ -1,0 +1,35 @@
+{
+  "how_to_use": "How to Use Our System?",
+  "how_to_use_desc": "A smart guide for farmers and users — pick the way that fits your need.",
+  "mode_1_title": "1. Detect Disease from Leaf Image",
+  "mode_1_subtitle": "No lab, no expert — just a photo!",
+  "mode_1_steps": [
+    "Capture or upload a leaf image",
+    "Our AI will instantly tell you the disease name",
+    "Done! No soil data needed"
+  ],
+  "mode_1_footer": "Perfect for quick disease identification in the field",
+  "mode_1_button": "Try Disease Detection",
+
+  "mode_2_title": "2. Get Treatment from Soil & Environment Info",
+  "mode_2_subtitle": "Already know the disease? Let us suggest the treatment!",
+  "mode_2_steps": [
+    "Select the disease name (from dropdown)",
+    "Enter your soil details: pH, Moisture, Temperature, Nitrogen, Phosphorous, Potassium",
+    "Get the most suitable treatment instantly"
+  ],
+  "mode_2_footer": "Ideal for precision agriculture with local soil awareness",
+  "mode_2_button": "Suggest Treatment",
+
+  "mode_3_title": "3. Full Diagnosis + Smart Treatment",
+  "mode_3_subtitle": "The complete package — detect & treat in one go!",
+  "mode_3_steps": [
+    "Upload a leaf image",
+    "Enter your soil and environment details",
+    "Get both: The disease name and the best treatment plan"
+  ],
+  "mode_3_footer": "Best for new users and complete farm support",
+  "mode_3_button": "Start Full Diagnosis",
+
+  "footer_note": "No login needed. Fast. Farmer-friendly. AI-powered."
+}
