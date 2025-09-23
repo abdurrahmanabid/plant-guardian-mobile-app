@@ -1,0 +1,126 @@
+{
+  "title": "মাটি বিশ্লেষণ ফর্ম",
+  "subtitle": "ফসলের জন্য সঠিক পরামর্শের জন্য মাটি বিশ্লেষণ তথ্য প্রদান করুন",
+  "nitrogen": "নাইট্রোজেন",
+  "phosphorus": "ফসফরাস",
+  "potassium": "পটাশিয়াম",
+  "ph": "পি.এইচ.",
+  "rainfall": "বৃষ্টিপাত",
+  "temperature": "তাপমাত্রা",
+  "soilColor": "মাটির রং",
+  "crop": "ফসল",
+  "disease": "রোগ",
+  "nitrogenDesc": "মাটির নাইট্রোজেন উপাদান",
+  "phosphorusDesc": "মাটির ফসফরাস উপাদান",
+  "potassiumDesc": "মাটির পটাশিয়াম উপাদান",
+  "phDesc": "মাটির পিএইচ স্তর",
+  "rainfallDesc": "বার্ষিক বৃষ্টিপাত মিলিমিটারে",
+  "temperatureDesc": "মাটির তাপমাত্রা সেলসিয়াসে",
+  "soilColorDesc": "মাটির রং",
+  "cropDesc": "বিশ্লেষণের জন্য ফসল নির্বাচন করুন",
+  "diseaseDesc": "ফসলের উপর ভিত্তি করে রোগ নির্বাচন করুন",
+  "temperaturePlaceholder": "তাপমাত্রা প্রবেশ করুন (যেমন, ২৫)",
+  "rainfallPlaceholder": "বার্ষিক বৃষ্টিপাত প্রবেশ করুন",
+  "soilColorPlaceholder": "মাটির রং নির্বাচন করুন",
+  "selectCrop": "ফসল নির্বাচন করুন",
+  "selectDisease": "রোগ নির্বাচন করুন",
+  "selectSoilColor": "মাটির রং নির্বাচন করুন",
+  "submitForm": "বিশ্লেষণ জমা দিন",
+  "selectField": "একটি ক্ষেত্র নির্বাচন করুন",
+  "selectFieldDesc": "বাম সাইডবার থেকে যেকোনো একটি ক্ষেত্র নির্বাচন করুন যাতে সেটি কনফিগার করা যায়",
+  "fieldPreview": "ক্ষেত্রের প্রিভিউ",
+  "fieldProperties": "ক্ষেত্রের গুণাবলী",
+  "fieldType": "ক্ষেত্রের ধরন",
+  "required": "প্রয়োজনীয়",
+  "placeholder": "প্লেসহোল্ডার",
+  "whyImportant": "এটি কেন গুরুত্বপূর্ণ?",
+  "temperatureImportance": "মাটির তাপমাত্রা উদ্ভিদের বৃদ্ধি এবং পুষ্টির শোষণকে প্রভাবিত করে। এটি সঠিক রোপণ সময় এবং ফসল নির্বাচন নির্ধারণে সহায়ক।",
+  "rainfallImportance": "বার্ষিক বৃষ্টিপাত উদ্ভিদের জন্য জল সরবরাহ এবং সেচের পরিকল্পনা প্রভাবিত করে।",
+  "soilColorImportance": "মাটির রং মাটির স্বাস্থ্য এবং ফসলের বৃদ্ধিতে প্রভাব ফেলতে পারে।",
+  "nitrogenImportance": "নাইট্রোজেন পত্রিকা বৃদ্ধির জন্য এবং ক্লোরোফিল উৎপাদনের জন্য অত্যন্ত গুরুত্বপূর্ণ। এটি উদ্ভিদের বিকাশের জন্য একটি প্রধান পুষ্টি উপাদান।",
+  "phosphorusImportance": "ফসফরাস শিকড়ের বিকাশ, ফুল ফোটা এবং বীজ উৎপাদনের জন্য গুরুত্বপূর্ণ। এটি উদ্ভিদের প্রজনন প্রক্রিয়ার জন্য অত্যন্ত প্রয়োজনীয়।",
+  "potassiumImportance": "পটাশিয়াম রোগ প্রতিরোধ, খরা সহিষ্ণুতা এবং ফলের গুণমান উন্নত করতে সহায়ক। এটি উদ্ভিদের সামগ্রিক স্বাস্থ্য রক্ষা করে।",
+  "cropImportance": "ফসলের সঠিক নির্বাচন মাটি এবং জলবায়ু পরিস্থিতি অনুসারে প্রয়োজনীয় পুষ্টি এবং বৃদ্ধির জন্য অত্যন্ত গুরুত্বপূর্ণ।",
+  "diseaseImportance": "রোগ শনাক্তকরণ সঠিক চিকিৎসার পদ্ধতি নির্বাচন এবং ফসলের ক্ষতি প্রতিরোধে সহায়ক।",
+  "soilColors": {
+    "Black": "কালো",
+    "Red": "লাল",
+    "Dark Brown": "গা dark ় বাদামী",
+    "Reddish Brown": "লালচে বাদামী"
+  },
+  "crops": {
+    "Apple": "আপেল",
+    "Corn": "ভুট্টা (মক্কা)",
+    "Grape": "আঙ্গুর",
+    "Mango": "আম",
+    "Orange": "কমলা",
+    "Pepper": "মরিচ বেল",
+    "Potato": "আলু",
+    "Rice": "চাল",
+    "Tomato": "টমেটো"
+  },
+  "diseases": {
+    "Apple": {
+      "Apple___Apple_scab": "আপেল স্ক্যাব",
+      "Apple___Black_rot": "ব্ল্যাক রট",
+      "Apple___Cedar_apple_rust": "সিডার আপেল রস্ট",
+      "Apple___brown_spot": "ব্রাউন স্পট",
+      "Apple___healthy": "স্বাস্থ্যকর"
+    },
+    "Corn": {
+      "Corn_(maize)___Cercospora_leaf_spot_Gray_leaf_spot": "সার্কোস্পোরা পাতার দাগ / গ্রে লিফ স্পট",
+      "Corn_(maize)___Common_rust_": "কমন রস্ট",
+      "Corn_(maize)___Northern_Leaf_Blight": "নর্দার্ন লিফ ব্লাইট",
+      "Corn_(maize)___healthy": "স্বাস্থ্যকর"
+    },
+    "Grape": {
+      "Grape___black_measles": "ব্ল্যাক মেজলস",
+      "Grape___black_rot": "ব্ল্যাক রट",
+      "Grape___healthy": "স্বাস্থ্যকর",
+      "Grape___leaf_blight": "পাতার ব্লাইট"
+    },
+    "Mango": {
+      "Mango___anthracnose": "অ্য্যানথ্রাকনোস",
+      "Mango___bacterial_canker": "ব্যাকটেরিয়াল ক্যানকার",
+      "Mango___gall_midge": "গ্যাল মিডজ",
+      "Mango___healthy": "স্বাস্থ্যকর"
+    },
+    "Orange": {
+      "Orange___citrus_canker": "সাইট্রাস ক্যানকার",
+      "Orange___citrus_mealybugs": "সাইট্রাস মিলিবাগস",
+      "Orange___die_back": "ডাই ব্যাক",
+      "Orange___foliage_damaged": "পাতার ক্ষতি",
+      "Orange___healthy": "স্বাস্থ্যকর",
+      "Orange___powdery_mildew": "পাউডারি মিলডিউ",
+      "Orange___shot_hole": "শট হোল",
+      "Orange___spiny_whitefly": "স্পাইনী হোয়াইটফ্লাই"
+    },
+    "Pepper": {
+      "Pepper__bell___Bacterial_spot": "ব্যাকটেরিয়াল স্পট",
+      "Pepper__bell___healthy": "স্বাস্থ্যকর"
+    },
+    "Potato": {
+      "Potato___Early_blight": "এরলি ব্লাইট",
+      "Potato___Late_blight": "লেট ব্লাইট",
+      "Potato___healthy": "স্বাস্থ্যকর"
+    },
+    "Rice": {
+      "Rice___bacterial_leaf_blight": "ব্যাকটেরিয়াল পাতার ব্লাইট",
+      "Rice___brown_spot": "ব্রাউন স্পট",
+      "Rice___healthy": "স্বাস্থ্যকর",
+      "Rice___narrow_brown_spot": "ন্যারো ব্রাউন স্পট"
+    },
+    "Tomato": {
+      "Tomato_Bacterial_spot": "ব্যাকটেরিয়াল স্পট",
+      "Tomato_Early_blight": "এরলি ব্লাইট",
+      "Tomato_Late_blight": "লেট ব্লাইট",
+      "Tomato_Leaf_Mold": "পাতার মোল্ড",
+      "Tomato_Septoria_leaf_spot": "সেপ্টোরিয়া পাতার দাগ",
+      "Tomato_Spider_mites_Two_spotted_spider_mite": "স্পাইডার মাইটস / টু স্পটেড স্পাইডার মাইট",
+      "Tomato_Target_Spot": "টার্গেট স্পট",
+      "Tomato__Tomato_YellowLeaf__Curl_Virus": "টমেটো ইয়েলো লিফ কার্ল ভাইরাস",
+      "Tomato__Tomato_mosaic_virus": "টমেটো মোজাইক ভাইরাস",
+      "Tomato_healthy": "স্বাস্থ্যকর"
+    }
+  }
+}

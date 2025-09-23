@@ -12,6 +12,7 @@ import { Text as RNText, TextInput as RNTextInput, StatusBar } from "react-nativ
 import "../src/i18n";
 import "./global.css";
 
+
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {

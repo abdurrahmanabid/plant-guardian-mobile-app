@@ -1,0 +1,126 @@
+{
+  "title": "Soil Analysis Form",
+  "subtitle": "Provide soil analysis data for crop-specific recommendations",
+  "nitrogen": "Nitrogen",
+  "phosphorus": "Phosphorus",
+  "potassium": "Potassium",
+  "ph": "pH",
+  "rainfall": "Rainfall",
+  "temperature": "Temperature",
+  "soilColor": "Soil Color",
+  "crop": "Crop",
+  "disease": "Disease",
+  "nitrogenDesc": "Nitrogen content in soil",
+  "phosphorusDesc": "Phosphorus content in soil",
+  "potassiumDesc": "Potassium content in soil",
+  "phDesc": "Soil pH level",
+  "rainfallDesc": "Annual rainfall in mm",
+  "temperatureDesc": "Soil temperature in Celsius",
+  "soilColorDesc": "Color of the soil",
+  "cropDesc": "Select the crop to analyze",
+  "diseaseDesc": "Select disease based on crop",
+  "temperaturePlaceholder": "Enter temperature (e.g., 25)",
+  "rainfallPlaceholder": "Enter annual rainfall",
+  "soilColorPlaceholder": "Select soil color",
+  "selectCrop": "Select Crop",
+  "selectDisease": "Select Disease",
+  "selectSoilColor": "Select Soil Color",
+  "submitForm": "Submit Analysis",
+  "selectField": "Select a field",
+  "selectFieldDesc": "Choose any field from the left sidebar to configure it",
+  "fieldPreview": "Field Preview",
+  "fieldProperties": "Field Properties",
+  "fieldType": "Field Type",
+  "required": "Required",
+  "placeholder": "Placeholder",
+  "whyImportant": "Why is this important?",
+  "temperatureImportance": "Soil temperature affects plant growth and nutrient absorption. It helps determine the best planting time and crop selection.",
+  "rainfallImportance": "Annual rainfall affects water availability for plants and influences irrigation planning.",
+  "soilColorImportance": "Soil color can indicate soil composition and health, affecting plant growth.",
+  "nitrogenImportance": "Nitrogen is crucial for leaf growth and chlorophyll production. It's a primary nutrient for plant development.",
+  "phosphorusImportance": "Phosphorus is vital for root development, flowering, and seed formation. It's crucial for plant reproduction.",
+  "potassiumImportance": "Potassium helps with disease resistance, drought tolerance, and fruit quality. It's essential for overall plant health.",
+  "cropImportance": "The correct crop selection based on soil and climatic conditions is important for proper nutrition and growth.",
+  "diseaseImportance": "Disease identification helps in selecting appropriate treatment methods and preventing crop loss.",
+  "soilColors": {
+    "Black": "Black",
+    "Red": "Red",
+    "Dark Brown": "Dark Brown",
+    "Reddish Brown": "Reddish Brown"
+  },
+  "crops": {
+    "Apple": "Apple",
+    "Corn": "Corn (Maize)",
+    "Grape": "Grape",
+    "Mango": "Mango",
+    "Orange": "Orange",
+    "Pepper": "Pepper Bell",
+    "Potato": "Potato",
+    "Rice": "Rice",
+    "Tomato": "Tomato"
+  },
+  "diseases": {
+    "Apple": {
+      "Apple___Apple_scab": "Apple Scab",
+      "Apple___Black_rot": "Black Rot",
+      "Apple___Cedar_apple_rust": "Cedar Apple Rust",
+      "Apple___brown_spot": "Brown Spot",
+      "Apple___healthy": "Healthy"
+    },
+    "Corn": {
+      "Corn_(maize)___Cercospora_leaf_spot_Gray_leaf_spot": "Cercospora Leaf Spot / Gray Leaf Spot",
+      "Corn_(maize)___Common_rust_": "Common Rust",
+      "Corn_(maize)___Northern_Leaf_Blight": "Northern Leaf Blight",
+      "Corn_(maize)___healthy": "Healthy"
+    },
+    "Grape": {
+      "Grape___black_measles": "Black Measles",
+      "Grape___black_rot": "Black Rot",
+      "Grape___healthy": "Healthy",
+      "Grape___leaf_blight": "Leaf Blight"
+    },
+    "Mango": {
+      "Mango___anthracnose": "Anthracnose",
+      "Mango___bacterial_canker": "Bacterial Canker",
+      "Mango___gall_midge": "Gall Midge",
+      "Mango___healthy": "Healthy"
+    },
+    "Orange": {
+      "Orange___citrus_canker": "Citrus Canker",
+      "Orange___citrus_mealybugs": "Citrus Mealybugs",
+      "Orange___die_back": "Die Back",
+      "Orange___foliage_damaged": "Foliage Damaged",
+      "Orange___healthy": "Healthy",
+      "Orange___powdery_mildew": "Powdery Mildew",
+      "Orange___shot_hole": "Shot Hole",
+      "Orange___spiny_whitefly": "Spiny Whitefly"
+    },
+    "Pepper": {
+      "Pepper__bell___Bacterial_spot": "Bacterial Spot",
+      "Pepper__bell___healthy": "Healthy"
+    },
+    "Potato": {
+      "Potato___Early_blight": "Early Blight",
+      "Potato___Late_blight": "Late Blight",
+      "Potato___healthy": "Healthy"
+    },
+    "Rice": {
+      "Rice___bacterial_leaf_blight": "Bacterial Leaf Blight",
+      "Rice___brown_spot": "Brown Spot",
+      "Rice___healthy": "Healthy",
+      "Rice___narrow_brown_spot": "Narrow Brown Spot"
+    },
+    "Tomato": {
+      "Tomato_Bacterial_spot": "Bacterial Spot",
+      "Tomato_Early_blight": "Early Blight",
+      "Tomato_Late_blight": "Late Blight",
+      "Tomato_Leaf_Mold": "Leaf Mold",
+      "Tomato_Septoria_leaf_spot": "Septoria Leaf Spot",
+      "Tomato_Spider_mites_Two_spotted_spider_mite": "Spider Mites / Two Spotted Spider Mite",
+      "Tomato_Target_Spot": "Target Spot",
+      "Tomato__Tomato_YellowLeaf__Curl_Virus": "Yellow Leaf Curl Virus",
+      "Tomato__Tomato_mosaic_virus": "Mosaic Virus",
+      "Tomato_healthy": "Healthy"
+    }
+  }
+}

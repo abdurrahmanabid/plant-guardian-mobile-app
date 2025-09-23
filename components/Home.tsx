@@ -11,7 +11,7 @@ export default function Home() {
       text={t('left-text')}
       info={t('right-text')}
       cta={t('right-button')}
-      onPress={() => router.push('/(system)/LeafPredict')}
+      onPress={() => router.push('/(system)/SoilPredict')}
     />
   )
 }
