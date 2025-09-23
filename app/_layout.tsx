@@ -8,7 +8,7 @@ import { useFonts } from "expo-font";
 import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
-import { Text as RNText, TextInput as RNTextInput } from "react-native";
+import { Text as RNText, TextInput as RNTextInput, StatusBar } from "react-native";
 import "../src/i18n";
 import "./global.css";
 
@@ -47,9 +47,12 @@ export default function RootLayout() {
   if (!fontsLoaded) return null;
 
   return (
-    <Stack>
-      <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-      <Stack.Screen name="(auth)" options={{ headerShown: false }} />
-    </Stack>
+    <>
+      <StatusBar barStyle="light-content" translucent backgroundColor="transparent" />
+      <Stack>
+        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+        <Stack.Screen name="(auth)" options={{ headerShown: false }} />
+        <Stack.Screen name="(system)" options={{ headerShown: false }} />
+      </Stack></>
   );
 }

@@ -1,0 +1,20 @@
+{
+  "title": "Leaf Disease Prediction",
+  "subtitle": "Upload a clear photo of a single leaf to detect disease. JPEG/PNG/WebP supported.",
+  "dropTitle": "Drag & drop a leaf image here",
+  "dropHelp": "or click the button to browse",
+  "browseBtn": "Browse Image",
+  "hint": "Max file size: {{mb}} MB. Supported: JPG, PNG, WebP",
+  "replace": "Replace",
+  "predictBtn": "Predict Disease",
+  "results": "Results",
+  "noResult": "Prediction will appear here after you upload an image and click Predict.",
+  "predicted": "Predicted label",
+  "confidence": "Confidence: {{pct}}%",
+  "alternatives": "Top alternatives",
+  "care": "Care suggestions",
+  "errType": "Unsupported file type. Please use JPG, PNG, or WebP.",
+  "errSize": "File too large. Maximum {{mb}} MB.",
+  "errServer": "Prediction request failed",
+  "errUnknown": "Something went wrong. Please try again."
+}
