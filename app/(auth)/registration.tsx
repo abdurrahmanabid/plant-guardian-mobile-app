@@ -1,4 +1,5 @@
 import Background from '@/components/Background'
+import api from '@/hooks/api'
 import { useRouter } from 'expo-router'
 import React, { useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -17,23 +18,71 @@ export default function Registration() {
     const [city, setCity] = useState('')
     const [state, setState] = useState('')
     const [loading, setLoading] = useState(false)
+    const [errors, setErrors] = useState<Record<string, string>>({})
 
     const roles = useMemo(() => (['Doctor', 'Farmer'] as const), [])
 
     const onSubmit = async () => {
-        try {
-            if (!name) return Alert.alert(t('errors.name'))
-            if (!email) return Alert.alert(t('errors.email.required'))
-            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return Alert.alert(t('errors.email.format'))
-            if (password.length < 6) return Alert.alert(t('errors.password'))
-            if (!role) return Alert.alert(t('errors.role'))
+        // Basic client-side validation
+        const nextErrors: Record<string, string> = {}
+        if (!name.trim()) nextErrors.name = t('errors.name') as string
+        if (!email.trim()) nextErrors.email = t('errors.email.required') as string
+        if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) nextErrors.email = t('errors.email.format') as string
+        if (!password || password.length < 6) nextErrors.password = t('errors.password') as string
+        if (!role) nextErrors.role = t('errors.role') as string
 
-            setLoading(true)
-            await new Promise(r => setTimeout(r, 700))
-            Alert.alert(t('success.default', { name }))
+        if (Object.keys(nextErrors).length > 0) {
+            setErrors(nextErrors)
+            return
+        }
+
+        setLoading(true)
+        setErrors({})
+
+        const payload = {
+            name: name.trim(),
+            email: email.trim(),
+            phone: phone.trim() || null,
+            password,
+            role,
+            address: street || city || state
+                ? { street: street.trim(), city: city.trim(), state: state.trim() }
+                : null,
+        }
+
+        try {
+            const res = await api.post('/user/signup', payload)
+            console.log(res.data)
+            const msg = res?.data?.message || (t('success.default', { name: payload.name }) as string)
+            Alert.alert(msg)
+
+            // Reset form
+            setName('')
+            setEmail('')
+            setPhone('')
+            setPassword('')
+            setStreet('')
+            setCity('')
+            setState('')
+            setRole('')
+
             router.replace('/(auth)/login')
-        } catch (e) {
-            Alert.alert(t('errors.server'))
+        } catch (err: any) {
+            console.log({err: JSON.stringify(err)})
+            const status = err?.response?.status
+
+            console.log("status", status)
+
+            const fallbackMsg = (t('errors.server') as string) || 'Something went wrong'
+            const networkMsg = 'Network error. Please check your connection and server URL.'
+            const msg = err?.response?.data?.message || (err?.message === 'Network Error' ? networkMsg : err?.message) || fallbackMsg
+
+            if (status === 409) {
+                const conflictField = err?.response?.data?.field || (msg?.includes('email') ? 'email' : msg?.includes('phone') ? 'phone' : null)
+                if (conflictField) setErrors(prev => ({ ...prev, [conflictField]: msg }))
+            }
+
+            Alert.alert('Error', String(msg))
         } finally {
             setLoading(false)
         }

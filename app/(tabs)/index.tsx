@@ -13,7 +13,7 @@ export default function Index() {
         className="absolute w-full z-0"
         resizeMode="cover"
       />
-      <ScrollView contentContainerStyle={{ paddingBottom: 40 }}>
+      <ScrollView contentContainerStyle={{ paddingBottom: 0 }}>
         <Image source={icons.logo} className="max-w-20 max-h-20 mt-20 mb-5 mx-auto" />
         <Home />
         <HowTo />

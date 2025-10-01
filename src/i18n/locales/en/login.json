@@ -12,7 +12,9 @@
   },
   "buttons": {
     "submit": "Log in",
-    "submitting": "Logging in..."
+    "submitting": "Logging in...",
+    "continue": "Continue",
+    "ok": "OK"
   },
   "links": {
     "forgot": "Forgot password?",
