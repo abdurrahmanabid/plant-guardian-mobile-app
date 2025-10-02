@@ -35,7 +35,8 @@
       "button": "Sign In",
       "noAccount": "Don't have an account?",
       "registerHere": "Register here"
-    }
+    },
+    "logout": "Logout"
   },
   "language": {
     "switch": "Switch Language",

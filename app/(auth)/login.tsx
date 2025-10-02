@@ -33,7 +33,6 @@ export default function Login() {
       })
 
       const message = res?.data?.message || (t('success.default') as string)
-      console.log(res.data)
       await AsyncStorage.setItem('Login', 'true')
 
       // Token storage disabled (cookie-based auth)
@@ -127,7 +126,7 @@ export default function Login() {
                 className="px-4 py-2 rounded-xl"
                 style={{ backgroundColor: isSuccess ? '#1E90FF' : '#6B7280' }}
               >
-                <Text className="text-white">{isSuccess ? t('buttons.continue') : t('buttons.ok') }</Text>
+                <Text className="text-white">{isSuccess ? t('buttons.continue') : t('buttons.ok')}</Text>
               </Pressable>
             </View>
           </View>
