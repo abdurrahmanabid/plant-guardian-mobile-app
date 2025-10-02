@@ -14,7 +14,7 @@ export default function HowTo() {
   const items = useMemo(() => ([
     { title: "mode_1_title", subtitle: "mode_1_subtitle", steps: "mode_1_steps", footer: "mode_1_footer", button: "mode_1_button" ,onPress: () => router.push("/(system)/LeafPredict")},
     { title: "mode_2_title", subtitle: "mode_2_subtitle", steps: "mode_2_steps", footer: "mode_2_footer", button: "mode_2_button" ,onPress: () => router.push("/(system)/SoilPredict")},
-    { title: "mode_3_title", subtitle: "mode_3_subtitle", steps: "mode_3_steps", footer: "mode_3_footer", button: "mode_3_button" ,onPress: () => router.push("/(system)/SoilPredict")},
+    { title: "mode_3_title", subtitle: "mode_3_subtitle", steps: "mode_3_steps", footer: "mode_3_footer", button: "mode_3_button" ,onPress: () => router.push({ pathname: '/(system)/LeafPredict', params: { type: 'all' } })},
   ]), []);
 
   const renderMode = (

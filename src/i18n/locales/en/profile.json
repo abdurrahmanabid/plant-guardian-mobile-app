@@ -1,12 +1,18 @@
 {
   "profile": {
     "title": "Profile",
+    "profileId": "Profile ID",
     "createProfile": "Create Profile",
     "editProfile": "Edit Profile",
     "fullName": "Full Name",
     "email": "Email",
     "phone": "Phone Number",
     "address": "Address",
+    "street": "Street",
+    "city": "City",
+    "state": "State",
+    "about": "About",
+    "aboutText": "{{name}} is a {{role}} based in {{city}}, {{state}}.",
     "save": "Save",
     "update": "Update",
     "profileCreated": "Profile created successfully",
@@ -36,5 +42,25 @@
     "bn": "Bengali",
     "en": "English",
     "current": "Current language: English"
+  },
+  "soil-result": {
+    "title": "Analysis Result",
+    "subtitle": "Combined insights from leaf image and soil data.",
+    "disease": "Disease",
+    "fertilizer": "Fertilizer",
+    "treatment": "Treatment",
+    "care": "Care",
+    "medicine": "Medicine",
+    "confidence": "Confidence",
+    "inputData": {
+      "title": "Input Data"
+    },
+    "buttons": {
+      "gptDetails": "AI Explain",
+      "newAnalysis": "New Analysis"
+    },
+    "gptError": {
+      "failed": "Failed to get explanation."
+    }
   }
 }

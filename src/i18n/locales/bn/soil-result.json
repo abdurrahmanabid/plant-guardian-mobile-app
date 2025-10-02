@@ -1,0 +1,57 @@
+{
+  "title": "মৃত্তিকা বিশ্লেষণ - ফলাফল",
+  "subtitle": "আপনার মৃত্তিকা বিশ্লেষণের ফলাফল এবং সুপারিশসমূহ",
+
+  "results": {
+    "title": "বিশ্লেষণ ফলাফল",
+    "fertilizerLabel": "প্রস্তাবিত সার",
+    "treatmentLabel": "চিকিৎসা সুপারিশ",
+    "disease": "অনুমান করা রোগ",
+    "confidenceLabel": "কনফিডেন্স",
+    "additionalResults": "অতিরিক্ত ফলাফল",
+    "noRecommendation": "কোনো সুপারিশ উপলব্ধ নেই",
+    "noTreatment": "কোনো চিকিৎসা সুপারিশ উপলব্ধ নেই",
+    "explanationLabel": "এআই ব্যাখ্যা",
+    "explainedFields": {
+      "whyFertilizer": "এই সার কেন",
+      "whyTreatment": "এই চিকিৎসা কেন",
+      "care": "যত্ন",
+      "medicine": "ঔষধ",
+      "benefit": "সুবিধা",
+      "tips": "টিপস"
+    }
+  },
+
+  "inputData": {
+    "title": "ইনপুট ডেটা সারাংশ",
+    "noData": "কোনো ইনপুট ডেটা উপলব্ধ নেই"
+  },
+
+  "error": {
+    "title": "ত্রুটি",
+    "tryAgain": "আবার চেষ্টা করুন"
+  },
+
+  "buttons": {
+    "newAnalysis": "নতুন বিশ্লেষণ",
+    "getDetails": "এআই দিয়ে বিশ্লেষণ করুন",
+    "gptDetails": "এআই ব্যাখ্যা পান",
+    "generating": "তৈরি হচ্ছে..."
+  },
+  "gptError": {
+    "failed": "ব্যাখ্যা পেতে সমস্যা হয়েছে। আবার চেষ্টা করুন।",
+    "noExplanation": "কোনো ব্যাখ্যা পাওয়া যায়নি।"
+  },
+
+  "fields": {
+    "temperature": "তাপমাত্রা",
+    "ph": "pH মাত্রা",
+    "rainfall": "বৃষ্টিপাত",
+    "soilColor": "মাটির রং",
+    "nitrogen": "নাইট্রোজেন",
+    "potassium": "পটাসিয়াম",
+    "phosphorus": "ফসফরাস",
+    "crop": "ফসলের ধরন",
+    "disease": "রোগ"
+  }
+}

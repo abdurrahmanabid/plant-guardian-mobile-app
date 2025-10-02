@@ -50,11 +50,11 @@
   },
   "crops": {
     "Apple": "Apple",
-    "Corn": "Corn (Maize)",
+    "Corn_(maize)": "Corn (Maize)",
     "Grape": "Grape",
     "Mango": "Mango",
     "Orange": "Orange",
-    "Pepper": "Pepper Bell",
+    "Pepper__bell": "Pepper Bell",
     "Potato": "Potato",
     "Rice": "Rice",
     "Tomato": "Tomato"
@@ -67,7 +67,7 @@
       "Apple___brown_spot": "Brown Spot",
       "Apple___healthy": "Healthy"
     },
-    "Corn": {
+    "Corn_(maize)": {
       "Corn_(maize)___Cercospora_leaf_spot_Gray_leaf_spot": "Cercospora Leaf Spot / Gray Leaf Spot",
       "Corn_(maize)___Common_rust_": "Common Rust",
       "Corn_(maize)___Northern_Leaf_Blight": "Northern Leaf Blight",
@@ -95,7 +95,7 @@
       "Orange___shot_hole": "Shot Hole",
       "Orange___spiny_whitefly": "Spiny Whitefly"
     },
-    "Pepper": {
+    "Pepper__bell": {
       "Pepper__bell___Bacterial_spot": "Bacterial Spot",
       "Pepper__bell___healthy": "Healthy"
     },

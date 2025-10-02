@@ -1,12 +1,18 @@
 {
   "profile": {
     "title": "প্রোফাইল",
+    "profileId": "প্রোফাইল আইডি",
     "createProfile": "প্রোফাইল তৈরি করুন",
     "editProfile": "প্রোফাইল সম্পাদনা করুন",
     "fullName": "পুরো নাম",
     "email": "ইমেইল",
     "phone": "ফোন নম্বর",
     "address": "ঠিকানা",
+    "street": "রাস্তা",
+    "city": "শহর",
+    "state": "রাজ্য/বিভাগ",
+    "about": "সম্পর্কে",
+    "aboutText": "{{name}} একজন {{role}}, থাকেন {{city}}, {{state}}।",
     "save": "সংরক্ষণ করুন",
     "update": "আপডেট করুন",
     "profileCreated": "প্রোফাইল সফলভাবে তৈরি হয়েছে",
@@ -36,5 +42,25 @@
     "bn": "বাংলা",
     "en": "ইংরেজি",
     "current": "বর্তমান ভাষা: বাংলা"
+  },
+  "soil-result": {
+    "title": "বিশ্লেষণ ফলাফল",
+    "subtitle": "পাতার ছবি এবং মাটির তথ্য থেকে সম্মিলিত অন্তর্দৃষ্টি।",
+    "disease": "রোগ",
+    "fertilizer": "সার",
+    "treatment": "চিকিৎসা",
+    "care": "যত্ন",
+    "medicine": "ঔষধ",
+    "confidence": "আত্মবিশ্বাস",
+    "inputData": {
+      "title": "ইনপুট ডেটা"
+    },
+    "buttons": {
+      "gptDetails": "এআই ব্যাখ্যা",
+      "newAnalysis": "নতুন বিশ্লেষণ"
+    },
+    "gptError": {
+      "failed": "ব্যাখ্যা পাওয়া যায়নি।"
+    }
   }
 }

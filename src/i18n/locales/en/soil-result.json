@@ -1,0 +1,57 @@
+{
+  "title": "Soil Analysis - Results",
+  "subtitle": "Your soil analysis results and recommendations",
+
+  "results": {
+    "title": "Analysis Results",
+    "fertilizerLabel": "Recommended Fertilizer",
+    "treatmentLabel": "Treatment Recommendation",
+    "disease": "Predicted Disease",
+    "confidenceLabel": "Confidence",
+    "additionalResults": "Additional Results",
+    "noRecommendation": "No recommendation available",
+    "noTreatment": "No treatment recommendation available",
+    "explanationLabel": "AI Explanation",
+    "explainedFields": {
+      "whyFertilizer": "Why this fertilizer",
+      "whyTreatment": "Why this treatment",
+      "care": "Care",
+      "medicine": "Medicine",
+      "benefit": "Benefits",
+      "tips": "Tips"
+    }
+  },
+
+  "inputData": {
+    "title": "Input Data Summary",
+    "noData": "No input data available"
+  },
+
+  "error": {
+    "title": "Error",
+    "tryAgain": "Try Again"
+  },
+
+  "buttons": {
+    "newAnalysis": "New Analysis",
+    "getDetails": "Analyze with AI",
+    "gptDetails": "Get AI Explanation",
+    "generating": "Generating..."
+  },
+  "gptError": {
+    "failed": "Failed to get explanation. Please try again.",
+    "noExplanation": "No explanation available."
+  },
+
+  "fields": {
+    "temperature": "Temperature",
+    "ph": "pH Level",
+    "rainfall": "Rainfall",
+    "soilColor": "Soil Color",
+    "nitrogen": "Nitrogen",
+    "potassium": "Potassium",
+    "phosphorus": "Phosphorus",
+    "crop": "Crop Type",
+    "disease": "Disease"
+  }
+}

@@ -1,15 +1,26 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Image, Pressable, ScrollView, Text, TextInput, View } from "react-native";
 
 import ThemedAlert from "@/components/ThemedAlert";
+import api from "@/hooks/api";
 import { images } from "@/src/constants/images";
+import { useLocalSearchParams, useRouter } from "expo-router";
 
 type SoilColorKey = "Black" | "Red" | "Dark Brown" | "Reddish Brown";
-type CropKey = "Apple" | "Corn" | "Grape" | "Mango" | "Orange" | "Pepper" | "Potato" | "Rice" | "Tomato";
+type CropKey = "Apple" | "Corn_(maize)" | "Grape" | "Mango" | "Orange" | "Pepper__bell" | "Potato" | "Rice" | "Tomato";
+
+// Derive crop name from a predicted disease label (e.g., "Rice___bacterial_leaf_blight")
+function deriveCropFromLabel(label?: string | null): string {
+  if (!label || typeof label !== 'string') return '';
+  if (label.includes('___')) return label.split('___')[0]?.trim() || '';
+  return label.split('_')[0]?.trim() || '';
+}
 
 export default function SoilPrediction() {
   const { t } = useTranslation(["soilInput"]);
+  const params = useLocalSearchParams<{ disease?: string; confidence?: string; image?: string; care?: string; medicine?: string }>();
+  const router = useRouter();
 
   const [nitrogen, setNitrogen] = useState("");
   const [phosphorus, setPhosphorus] = useState("");
@@ -19,7 +30,8 @@ export default function SoilPrediction() {
   const [rainfall, setRainfall] = useState("");
   const [soilColor, setSoilColor] = useState<SoilColorKey | "">("");
   const [crop, setCrop] = useState<CropKey | "">("");
-  const [disease, setDisease] = useState<string | "">("");
+  const [fromLeaf, setFromLeaf] = useState<{ disease?: string; confidence?: string; image?: string; care?: string; medicine?: string } | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const [alertVisible, setAlertVisible] = useState(false);
   const [alertTitle, setAlertTitle] = useState("");
@@ -31,20 +43,36 @@ export default function SoilPrediction() {
     setAlertVisible(true);
   };
 
+  const initRef = useRef(false);
+  const pDisease = params?.disease;
+  const pConfidence = params?.confidence;
+  const pImage = params?.image;
+  const pCare = params?.care;
+  const pMedicine = params?.medicine;
+
+  useEffect(() => {
+    if (initRef.current) return;
+    const hasLeaf = Boolean(pDisease || pConfidence || pImage || pCare || pMedicine);
+    if (!hasLeaf) return;
+    setFromLeaf({
+      disease: pDisease,
+      confidence: pConfidence,
+      image: pImage,
+      care: pCare,
+      medicine: pMedicine,
+    });
+    initRef.current = true;
+  }, [pDisease, pConfidence, pImage, pCare, pMedicine]);
+
   const soilColorOptions = useMemo(
     () => (["Black", "Red", "Dark Brown", "Reddish Brown"]) as SoilColorKey[],
     []
   );
   const cropOptions = useMemo(
-    () => (["Apple", "Corn", "Grape", "Mango", "Orange", "Pepper", "Potato", "Rice", "Tomato"]) as CropKey[],
+    () => (["Apple", "Corn_(maize)", "Grape", "Mango", "Orange", "Pepper__bell", "Potato", "Rice", "Tomato"]) as CropKey[],
     []
   );
 
-  const diseaseOptions = useMemo(() => {
-    if (!crop) return [] as string[];
-    const dict = t(`soilInput:diseases.${crop}`, { returnObjects: true }) as Record<string, string>;
-    return Object.keys(dict || {});
-  }, [crop, t]);
 
   return (
     <View className="flex-1 bg-primary">
@@ -154,35 +182,79 @@ export default function SoilPrediction() {
             renderLabel={(key) => t(`soilInput:soilColors.${key}`)}
           />
 
-          <View className="h-4" />
-          <FieldLabelWithInfo
-            title={t("soilInput:crop")!}
-            desc={t("soilInput:cropDesc")!}
-            onInfo={() => showAlert(t("soilInput:whyImportant")!, t("soilInput:cropImportance")!)}
-          />
-          <PickerRow
-            options={cropOptions}
-            value={crop}
-            onChange={setCrop as any}
-            renderLabel={(key) => t(`soilInput:crops.${key}`)}
-          />
+          {!fromLeaf && (
+            <>
+              <View className="h-4" />
+              <FieldLabelWithInfo
+                title={t("soilInput:crop")!}
+                desc={t("soilInput:cropDesc")!}
+                onInfo={() => showAlert(t("soilInput:whyImportant")!, t("soilInput:cropImportance")!)}
+              />
+              <PickerRow
+                options={cropOptions}
+                value={crop}
+                onChange={setCrop as any}
+                renderLabel={(key) => t(`soilInput:crops.${key}`)}
+              />
+            </>
+          )}
 
-          <View className="h-4" />
-          <FieldLabelWithInfo
-            title={t("soilInput:disease")!}
-            desc={t("soilInput:diseaseDesc")!}
-            onInfo={() => showAlert(t("soilInput:whyImportant")!, t("soilInput:diseaseImportance")!)}
-          />
-          <PickerRow
-            options={diseaseOptions}
-            value={disease}
-            onChange={setDisease}
-            renderLabel={(key) => t(`soilInput:diseases.${crop}.${key}`)}
-            disabled={!crop}
-          />
 
-          <Pressable className="mt-6 px-4 py-3 rounded-xl self-stretch items-center" style={{ backgroundColor: "#A8B5DB" }}>
-            <Text className="text-primary text-base" style={{ fontFamily: "HindSiliguri_600SemiBold" }}>{t("soilInput:submitForm")}</Text>
+          <Pressable disabled={isSubmitting} onPress={async () => {
+            setIsSubmitting(true);
+            try {
+              const payload = {
+                Temperature: parseInt(temperature || '0'),
+                pH: parseFloat(ph || '0'),
+                Rainfall: parseInt(rainfall || '0'),
+                Soil_color: soilColor,
+                Nitrogen: parseInt(nitrogen || '0'),
+                Potassium: parseInt(potassium || '0'),
+                Phosphorus: parseInt(phosphorus || '0'),
+                Crop: crop || (fromLeaf?.disease ? deriveCropFromLabel(fromLeaf?.disease) : ''),
+                // Disease removed - matching web AnimatedForm.jsx
+              }
+              console.log('payload', payload);
+              const response = await api.post('/predict/predict-fertilizer', payload);
+              const data = response?.data?.data || null;
+              const fertilizer = data?.fertilizer || '';
+              const formPayload = {
+                nitrogen, phosphorus, potassium, ph, temperature, rainfall, soilColor,
+                crop: payload.Crop,
+              };
+              router.push({
+                pathname: '/(system)/AnalysisResult',
+                params: {
+                  disease: fromLeaf?.disease || '',
+                  confidence: fromLeaf?.confidence || '',
+                  image: fromLeaf?.image || '',
+                  care: fromLeaf?.care || '',
+                  medicine: fromLeaf?.medicine || '',
+                  fertilizer: fertilizer,
+                  form: JSON.stringify(formPayload),
+                }
+              });
+            } catch (e) {
+              console.error('Soil prediction error:', e);
+              const formPayload = { nitrogen, phosphorus, potassium, ph, temperature, rainfall, soilColor, crop };
+              router.push({
+                pathname: '/(system)/AnalysisResult',
+                params: {
+                  disease: fromLeaf?.disease || '',
+                  confidence: fromLeaf?.confidence || '',
+                  image: fromLeaf?.image || '',
+                  care: fromLeaf?.care || '',
+                  medicine: fromLeaf?.medicine || '',
+                  fertilizer: '',
+                  form: JSON.stringify(formPayload),
+                  error: 'Server error. Please try again.',
+                }
+              });
+            } finally {
+              setIsSubmitting(false);
+            }
+          }} className="mt-6 px-4 py-3 rounded-xl self-stretch items-center" style={{ backgroundColor: isSubmitting ? "#3a3953" : "#A8B5DB" }}>
+            <Text className="text-primary text-base" style={{ fontFamily: "HindSiliguri_600SemiBold" }}>{isSubmitting ? t('soilInput:submitting') : t("soilInput:submitForm")}</Text>
           </Pressable>
         </View>
 
