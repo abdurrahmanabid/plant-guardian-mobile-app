@@ -1,3 +1,4 @@
+import LanguageSwitcher from "@/components/LanguageSwitcher";
 import {
   HindSiliguri_400Regular,
   HindSiliguri_500Medium,
@@ -57,6 +58,10 @@ export default function RootLayout() {
       },
     },
   };
+  // hiding status bar
+  useEffect(() => {
+    StatusBar.setHidden(true, "fade");
+  }, []);
 
   useEffect(() => {
     if (!fontsLoaded) return;
@@ -91,9 +96,9 @@ export default function RootLayout() {
   return (
     <ThemeProvider value={darkTheme}>
       <StatusBar
-        barStyle="light-content"
-        translucent
+        hidden={true}
         backgroundColor="transparent"
+        translucent
       />
       <View style={{ flex: 1, backgroundColor: darkTheme.colors.background }}>
         <Stack
@@ -108,6 +113,7 @@ export default function RootLayout() {
           <Stack.Screen name="(auth)" options={{ headerShown: false }} />
           <Stack.Screen name="(system)" options={{ headerShown: false }} />
         </Stack>
+        <LanguageSwitcher />
       </View>
     </ThemeProvider>
   );

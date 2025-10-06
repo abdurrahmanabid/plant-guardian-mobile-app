@@ -38,7 +38,7 @@ i18n.use(initReactI18next).init({
   compatibilityJSON: "v4",
   resources,
   lng: ["en", "bn"].includes(deviceLanguageCode) ? deviceLanguageCode : "en",
-  fallbackLng: "bn",
+  fallbackLng: "en",
   ns: ["common", "home", "search", "saved", "profile", "login", "registration", "leafPredict", "soilInput", "howTo", "soil-result"],
   defaultNS: "common",
   interpolation: { escapeValue: false },

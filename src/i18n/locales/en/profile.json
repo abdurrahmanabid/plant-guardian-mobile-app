@@ -15,6 +15,7 @@
     "aboutText": "{{name}} is a {{role}} based in {{city}}, {{state}}.",
     "save": "Save",
     "update": "Update",
+    "logout": "Logout",
     "profileCreated": "Profile created successfully",
     "profileUpdated": "Profile updated successfully",
     "noProfile": {
@@ -45,8 +46,7 @@
       "button": "Sign In",
       "noAccount": "Don't have an account?",
       "registerHere": "Register here"
-    },
-    "logout": "Logout"
+    }
   },
   "language": {
     "switch": "Switch Language",

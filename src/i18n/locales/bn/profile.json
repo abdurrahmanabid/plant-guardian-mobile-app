@@ -15,6 +15,7 @@
     "aboutText": "{{name}} একজন {{role}}, থাকেন {{city}}, {{state}}।",
     "save": "সংরক্ষণ করুন",
     "update": "আপডেট করুন",
+    "logout": "লগআউট করুন",
     "profileCreated": "প্রোফাইল সফলভাবে তৈরি হয়েছে",
     "profileUpdated": "প্রোফাইল সফলভাবে আপডেট হয়েছে",
     "noProfile": {
@@ -45,8 +46,7 @@
       "button": "লগইন",
       "noAccount": "অ্যাকাউন্ট নেই?",
       "registerHere": "এখানে নিবন্ধন করুন"
-    },
-    "logout": "লগআউট করুন"
+    }
   },
   "language": {
     "switch": "ভাষা পরিবর্তন করুন",
