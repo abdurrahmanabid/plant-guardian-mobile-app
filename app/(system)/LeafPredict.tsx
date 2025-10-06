@@ -1,11 +1,14 @@
+import ThemedAlert from "@/components/ThemedAlert";
 import * as ImagePicker from "expo-image-picker";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { useCallback, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Alert, Image, Pressable, ScrollView, Text, View } from "react-native";
+import { ActivityIndicator, Alert, Image, Pressable, ScrollView, Text, View } from "react-native";
 
 import api from "@/hooks/api";
 import { images } from "@/src/constants/images";
+import i18n from "@/src/i18n";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const MAX_MB = 8;
 const MAX_BYTES = MAX_MB * 1024 * 1024;
@@ -16,16 +19,24 @@ type PredictUI = {
 };
 
 export default function LeafPredict() {
-  const { t } = useTranslation(["leafPredict"]);
+  const { t } = useTranslation(["leafPredict", "soil-result"]);
   const router = useRouter();
   const { type } = useLocalSearchParams<{ type?: string }>();
   const [imageUri, setImageUri] = useState<string | null>(null);
+  const [serverImagePath, setServerImagePath] = useState<string | null>(null);
   const [isPicking, setIsPicking] = useState(false);
   const [loading, setLoading] = useState(false);
   const [uploadPct, setUploadPct] = useState(0);
   const [result, setResult] = useState<PredictUI | null>(null);
   const [error, setError] = useState<string | null>(null);
-
+  const [isExplaining, setIsExplaining] = useState(false);
+  const [gptErr, setGptErr] = useState<string>("");
+  const [gptText, setGptText] = useState<string>("");
+  const [saving, setSaving] = useState(false);
+  const [alertVisible, setAlertVisible] = useState(false);
+  const [alertTitle, setAlertTitle] = useState("");
+  const [alertMessage, setAlertMessage] = useState("");
+  const [submitted, setSubmitted] = useState(false);
   const requestPermissions = useCallback(async () => {
     const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
     if (status !== "granted") {
@@ -176,6 +187,8 @@ export default function LeafPredict() {
       if (!imagePath) {
         throw new Error('Upload succeeded but image path is missing in response.');
       }
+      setServerImagePath(imagePath);
+      await AsyncStorage.setItem('imagePath', imagePath);
 
       // 2) Predict using uploaded path
       const predictRes = await api.post('/predict/image-predict', { imagePath });
@@ -189,6 +202,7 @@ export default function LeafPredict() {
 
       // If "all" flow is requested, jump to soil analysis screen with context
       if ((type || '').toString() === 'all') {
+        setSubmitted(true);
         router.push({
           pathname: '/(system)/SoilPredict',
           params: {
@@ -210,7 +224,73 @@ export default function LeafPredict() {
     } finally {
       setLoading(false);
     }
-  }, [imageUri, t, type, router]);
+  }, [imageUri, t, type, router, submitted]);
+
+  const onExplain = useCallback(async () => {
+    if (!result) return;
+    setIsExplaining(true);
+    setGptErr("");
+    try {
+      const crop = (result.top.label || '').split('___')[0] || '';
+      const diseaseKey = result.top.label || '';
+      const diseaseLabel = crop ? t(`soilInput:diseases.${crop}.${diseaseKey}`) : diseaseKey;
+      const confidence = typeof result.top.confidence === 'number' ? result.top.confidence : undefined;
+      const care = result.treatment.care || '';
+      const medicine = result.treatment.medicine || '';
+      const isBengali = i18n.language === 'bn';
+
+      const req = {
+        content: `Analyze leaf prediction result. Disease: ${diseaseLabel || diseaseKey}. Confidence: ${confidence ?? 'N/A'}. Treatment: ${care} | ${medicine}.`,
+        systemMessage: `You're an agriculture expert. Explain simply for farmers. in json {benefit, tips, ${care || medicine ? 'whyTreatment' : ''}} provide in ${isBengali ? 'bangla' : 'english'}`,
+      };
+      const res = await api.post('gpt/gpt-explain', req);
+      const parsed = JSON.parse(res?.data?.response || '{}');
+      const { benefit, tips, whyTreatment } = parsed || {};
+      const out = `${whyTreatment ? `${t('soil-result:results.explainedFields.whyTreatment')}:\n${whyTreatment}\n\n` : ''}${benefit ? `${t('soil-result:results.explainedFields.benefit')}:\n${benefit}\n\n` : ''}${tips ? `${t('soil-result:results.explainedFields.tips')}:\n${tips}` : ''}`.trim();
+      setGptText(out || '');
+    } catch (e) {
+      setGptErr(t('soil-result:gptError.failed') as string);
+    } finally {
+      setIsExplaining(false);
+    }
+  }, [result, t]);
+
+  const onSave = useCallback(async () => {
+    try {
+      if (!serverImagePath || !result) {
+        setAlertTitle(t('common:error') as string);
+        setAlertMessage(t('soil-result:save.failed') as string);
+        setAlertVisible(true);
+        return;
+      }
+      setSaving(true);
+      const treatment = [
+        result.treatment.care ? `care: ${result.treatment.care}` : '',
+        result.treatment.medicine ? `medicine: ${result.treatment.medicine}` : ''
+      ].filter(Boolean).join(' | ');
+
+      const payload = {
+        imageUrl: serverImagePath,
+        diseaseName: result.top.label,
+        confidence: typeof result.top.confidence === 'number' ? result.top.confidence : undefined,
+        treatment: treatment || undefined,
+        description: gptText || undefined,
+      } as any;
+
+      const res = await api.post('/model/image', payload, { withCredentials: true });
+      const ok = !!res?.data?.success;
+      setAlertTitle(ok ? (t('common:success') as string) : (t('common:error') as string));
+      setAlertMessage(res?.data?.message || (ok ? (t('common:success') as string) : (t('soil-result:save.failed') as string)));
+      setAlertVisible(true);
+      await AsyncStorage.removeItem('imagePath');
+    } catch (e: any) {
+      setAlertTitle(t('common:error') as string);
+      setAlertMessage(e?.response?.data?.message || e?.message || (t('soil-result:save.failed') as string));
+      setAlertVisible(true);
+    } finally {
+      setSaving(false);
+    }
+  }, [serverImagePath, result, gptText, t]);
 
   return (
     <View className="flex-1 bg-primary">
@@ -321,7 +401,50 @@ export default function LeafPredict() {
             </View>
           )}
         </View>
+
+        {result && (
+          <View className="mt-4 rounded-2xl p-4 border border-white/10" style={{ backgroundColor: '#0F0D23' }}>
+            <Pressable disabled={isExplaining} onPress={onExplain} className="px-4 py-3 rounded-xl items-center" style={{ backgroundColor: isExplaining ? '#3a3953' : '#A8B5DB' }}>
+              {isExplaining ? (
+                <View className="flex-row items-center">
+                  <ActivityIndicator color="#0F0D23" size="small" />
+                  <Text className="text-primary ml-2" style={{ fontFamily: 'HindSiliguri_600SemiBold' }}>{t('soil-result:buttons.generating')}</Text>
+                </View>
+              ) : (
+                <Text className="text-primary" style={{ fontFamily: 'HindSiliguri_600SemiBold' }}>{t('soil-result:buttons.gptDetails')}</Text>
+              )}
+            </Pressable>
+            {gptErr ? (
+              <Text className="text-red-300 mt-3">{gptErr}</Text>
+            ) : null}
+            {gptText ? (
+              <Text className="text-white mt-3 whitespace-pre-wrap">{gptText}</Text>
+            ) : null}
+          </View>
+        )}
+
+        {result && type !== 'all' && !submitted && (
+          <View className="mt-4 rounded-2xl p-4 border border-white/10" style={{ backgroundColor: '#0F0D23' }}>
+            <Pressable disabled={saving} onPress={onSave} className="px-4 py-3 rounded-xl items-center" style={{ backgroundColor: saving ? '#3a3953' : '#93C5FD' }}>
+              {saving ? (
+                <View className="flex-row items-center">
+                  <ActivityIndicator color="#0F0D23" size="small" />
+                  <Text className="text-primary ml-2" style={{ fontFamily: 'HindSiliguri_600SemiBold' }}>{t('soil-result:buttons.saving')}</Text>
+                </View>
+              ) : (
+                <Text className="text-primary" style={{ fontFamily: 'HindSiliguri_600SemiBold' }}>{t('soil-result:buttons.save')}</Text>
+              )}
+            </Pressable>
+          </View>
+        )}
       </ScrollView>
+      <ThemedAlert
+        visible={alertVisible}
+        title={alertTitle}
+        message={alertMessage}
+        onClose={() => setAlertVisible(false)}
+        confirmText={t('common:ok') as string}
+      />
     </View>
   );
 }

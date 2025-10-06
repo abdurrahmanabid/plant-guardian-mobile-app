@@ -1,7 +1,15 @@
 {
+  "title": "Search",
+  "subtitle": "Find saved images by disease or view recent uploads.",
+  "byDisease": "Search by disease",
+  "diseasePlaceholder": "e.g. Mango___anthracnose",
+  "searchBtn": "Search",
+  "recentBtn": "Show Recent",
+  "resultsTitle": "Results",
+  "empty": "No results found.",
+  "error": "Failed to load results.",
   "left-title": "Search",
   "left-text": "Find plants, diseases, and care tips instantly.",
   "right-text": "Type a plant name or symptom to explore guides and diagnoses.",
   "right-button": "Start Searching"
 }
-

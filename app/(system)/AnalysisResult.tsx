@@ -1,10 +1,12 @@
+import ThemedAlert from "@/components/ThemedAlert";
 import api from "@/hooks/api";
 import { images } from "@/src/constants/images";
 import i18n from "@/src/i18n";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useLocalSearchParams, useRouter } from "expo-router";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { ActivityIndicator, Image, Pressable, ScrollView, Text, View } from "react-native";
+import { ActivityIndicator, BackHandler, Image, Pressable, ScrollView, Text, View } from "react-native";
 
 export default function AnalysisResult() {
   const { t } = useTranslation(["soilInput", "leafPredict", "soil-result"]);
@@ -14,7 +16,7 @@ export default function AnalysisResult() {
     care?: string; medicine?: string; fertilizer?: string;
     form?: string; error?: string;
   }>();
-
+  const endpoits = ['/soil-model/save', '/soil-and-image-model/save']
   const disease = params.disease || '';
   const confidence = params.confidence ? Number(params.confidence) : undefined;
   const image = params.image || '';
@@ -25,6 +27,7 @@ export default function AnalysisResult() {
   const formData = useMemo(() => {
     try { return params.form ? JSON.parse(params.form as string) : null; } catch { return null; }
   }, [params.form]);
+  console.log('formData in AnalysisResult', params);
   const data = formData ? {
     ...formData,
     crop: formData.crop ? t(`soilInput:crops.${formData.crop}`) : formData.crop,
@@ -34,6 +37,13 @@ export default function AnalysisResult() {
   const [isLoading, setIsLoading] = useState(false);
   const [gptText, setGptText] = useState<string>("");
   const [gptErr, setGptErr] = useState<string>("");
+  const [saving, setSaving] = useState(false);
+  const [saveMsg, setSaveMsg] = useState("");
+  const [saveErr, setSaveErr] = useState("");
+  const [saved, setSaved] = useState(false);
+  const [alertVisible, setAlertVisible] = useState(false);
+  const [alertTitle, setAlertTitle] = useState("");
+  const [alertMessage, setAlertMessage] = useState("");
 
   const prettyLabel = (label?: string) => {
     if (!label) return '-';
@@ -60,6 +70,108 @@ export default function AnalysisResult() {
       setIsLoading(false);
     }
   };
+
+  const onSave = async () => {
+    setSaveMsg("");
+    setSaveErr("");
+    setSaving(true);
+    try {
+      // common validation
+      if (!formData) {
+        const msg = t('soil-result:save.missingSoilForm');
+        setSaveErr(msg);
+        setAlertTitle(t('common:error'));
+        setAlertMessage(msg);
+        setAlertVisible(true);
+        return;
+      }
+
+      // choose endpoint by image presence
+      const hasImage = !!image && String(image).trim().length > 0;
+      if (hasImage) {
+        // POST /api/soil-and-image-model/save
+        const payload = {
+          temperature: formData.temperature,
+          phLevel: formData.ph,
+          soilColor: formData.soilColor,
+          rainfall: formData.rainfall,
+          nitrogen: formData.nitrogen,
+          phosphorous: formData.phosphorus,
+          confidence: params.confidence,
+          potassium: formData.potassium,
+          cropType: formData.crop,
+          diseaseDetected: disease,
+          imageUrl: image,
+          recommendedFertilizer: fertilizer,
+          treatmentSuggestion: [care, medicine].filter(Boolean).join(' | ') || undefined,
+        };
+        const res = await api.post(endpoits[1], payload, { withCredentials: true });
+        await AsyncStorage.removeItem('imagePath');
+        if (res?.data?.success) {
+          const msg = t('soil-result:save.savedSoilImage');
+          setSaveMsg(msg);
+          setSaved(true);
+          setAlertTitle(t('common:success'));
+          setAlertMessage(msg);
+          setAlertVisible(true);
+        } else {
+          const msg = t('soil-result:save.failed');
+          setSaveErr(msg);
+          setAlertTitle(t('common:error'));
+          setAlertMessage(msg);
+          setAlertVisible(true);
+        }
+      } else {
+        // POST /api/soil-model/save
+        const payload = {
+          temperature: formData.temperature,
+          phLevel: formData.ph,
+          soilColor: formData.soilColor,
+          rainfall: formData.rainfall,
+          nitrogen: formData.nitrogen,
+          phosphorous: formData.phosphorus,
+          potassium: formData.potassium,
+          cropType: formData.crop,
+          predictedFertilizer: fertilizer,
+          predictedTreatment: [care, medicine].filter(Boolean).join(' | ') || undefined,
+          confidence: typeof confidence === 'number' ? confidence : undefined,
+        };
+        const res = await api.post(endpoits[0], payload, { withCredentials: true });
+        await AsyncStorage.removeItem('imagePath');
+        if (res?.data?.success) {
+          const msg = t('soil-result:save.savedSoilOnly');
+          setSaveMsg(msg);
+          setSaved(true);
+          setAlertTitle(t('common:success'));
+          setAlertMessage(msg);
+          setAlertVisible(true);
+        } else {
+          const msg = t('soil-result:save.failed');
+          setSaveErr(msg);
+          setAlertTitle(t('common:error'));
+          setAlertMessage(msg);
+          setAlertVisible(true);
+        }
+      }
+    } catch (e) {
+      const msg = (e instanceof Error && e.message) || t('soil-result:save.failed');
+      setSaveErr(msg);
+      setAlertTitle(t('common:error'));
+      setAlertMessage(msg);
+      setAlertVisible(true);
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  // Android hardware back should take user directly to /(tabs)
+  useEffect(() => {
+    const sub = BackHandler.addEventListener('hardwareBackPress', () => {
+      router.replace('/(tabs)');
+      return true;
+    });
+    return () => sub.remove();
+  }, [router]);
 
   return (
     <View className="flex-1 bg-primary">
@@ -139,6 +251,21 @@ export default function AnalysisResult() {
             ) : null}
           </View>
 
+          {!saved && (
+            <View className="rounded-2xl p-4 border border-white/10" style={{ backgroundColor: '#0F0D23' }}>
+              <Pressable disabled={saving} onPress={onSave} className="px-4 py-3 rounded-xl items-center" style={{ backgroundColor: saving ? '#3a3953' : '#93C5FD' }}>
+                {saving ? (
+                  <View className="flex-row items-center">
+                    <ActivityIndicator color="#0F0D23" size="small" />
+                    <Text className="text-primary ml-2" style={{ fontFamily: 'HindSiliguri_600SemiBold' }}>{t('soil-result:buttons.saving')}</Text>
+                  </View>
+                ) : (
+                  <Text className="text-primary" style={{ fontFamily: 'HindSiliguri_600SemiBold' }}>{t('soil-result:buttons.save')}</Text>
+                )}
+              </Pressable>
+            </View>
+          )}
+
           <View className="rounded-2xl p-4 border border-white/10" style={{ backgroundColor: '#0F0D23' }}>
             <Pressable onPress={() => router.push('/(system)/SoilPredict')} className="px-4 py-3 rounded-xl items-center" style={{ backgroundColor: '#A8B5DB' }}>
               <Text className="text-primary" style={{ fontFamily: 'HindSiliguri_600SemiBold' }}>{t('soil-result:buttons.newAnalysis')}</Text>
@@ -146,6 +273,13 @@ export default function AnalysisResult() {
           </View>
         </View>
       </ScrollView>
+      <ThemedAlert
+        visible={alertVisible}
+        title={alertTitle}
+        message={alertMessage}
+        onClose={() => setAlertVisible(false)}
+        confirmText={t('common:ok')}
+      />
     </View>
   );
 }

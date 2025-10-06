@@ -4,6 +4,9 @@
   "search": "সার্চ",
   "saved": "সংরক্ষিত",
   "profile": "প্রোফাইল",
-  "search_placeholder": "গাছ অনুসন্ধান করুন..."
+  "search_placeholder": "গাছ অনুসন্ধান করুন...",
+  "success": "সফল",
+  "error": "ত্রুটি",
+  "ok": "ঠিক আছে",
+  "close": "বন্ধ করুন"
 }
-

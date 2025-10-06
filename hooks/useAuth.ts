@@ -1,5 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useEffect, useState } from 'react';
+import api from './api';
 
 export interface User {
   id: string;
@@ -80,6 +81,7 @@ export function useAuth() {
   const logout = async () => {
     try {
       await AsyncStorage.removeItem('Login');
+      await api.get('/user/signout');
       setAuthState({
         isLoggedIn: false,
         user: null,

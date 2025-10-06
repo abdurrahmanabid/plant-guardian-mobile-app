@@ -1,7 +1,6 @@
 {
   "title": "Soil Analysis - Results",
   "subtitle": "Your soil analysis results and recommendations",
-
   "results": {
     "title": "Analysis Results",
     "fertilizerLabel": "Recommended Fertilizer",
@@ -21,28 +20,26 @@
       "tips": "Tips"
     }
   },
-
   "inputData": {
     "title": "Input Data Summary",
     "noData": "No input data available"
   },
-
   "error": {
     "title": "Error",
     "tryAgain": "Try Again"
   },
-
   "buttons": {
     "newAnalysis": "New Analysis",
     "getDetails": "Analyze with AI",
     "gptDetails": "Get AI Explanation",
-    "generating": "Generating..."
+    "generating": "Generating...",
+    "save": "Save Result",
+    "saving": "Saving..."
   },
   "gptError": {
     "failed": "Failed to get explanation. Please try again.",
     "noExplanation": "No explanation available."
   },
-
   "fields": {
     "temperature": "Temperature",
     "ph": "pH Level",
@@ -53,5 +50,10 @@
     "phosphorus": "Phosphorus",
     "crop": "Crop Type",
     "disease": "Disease"
+  },
+  "save": {
+    "savedSoilOnly": "Soil information saved",
+    "savedSoilImage": "Soil information and image saved",
+    "failed": "Failed to save result. Please try again."
   }
 }

@@ -21,6 +21,16 @@
       "title": "No Profile",
       "message": "You haven't created a profile yet.",
       "createNow": "Create Now"
+    },
+    "links": {
+      "saved": {
+        "title": "Saved Analyses",
+        "subtitle": "View and manage your saved results"
+      },
+      "search": {
+        "title": "Search (Elasticsearch)",
+        "subtitle": "Find images by disease or see recent uploads"
+      }
     }
   },
   "auth": {

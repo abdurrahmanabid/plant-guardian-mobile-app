@@ -4,6 +4,9 @@
   "search": "Search",
   "saved": "Saved",
   "profile": "Profile",
-  "search_placeholder": "Search plants..."
+  "search_placeholder": "Search plants...",
+  "success": "Success",
+  "error": "Error",
+  "ok": "OK",
+  "close": "Close"
 }
-

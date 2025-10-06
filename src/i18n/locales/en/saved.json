@@ -1,7 +1,40 @@
 {
-  "left-title": "Saved",
-  "left-text": "All your bookmarked guides and diagnoses in one place.",
-  "right-text": "Access saved items offline and pick up where you left off.",
-  "right-button": "View Saved"
+  "title": "Your Saved Analyses",
+  "subtitle": "Browse your saved results and manage them.",
+  "loading": "Loading saved items...",
+  "error": "Failed to load saved items.",
+  "empty": "No items found.",
+  "stats": {
+    "imageOnly": "Images",
+    "soilOnly": "Soil",
+    "soilImage": "Soil + Image"
+  },
+  "sections": {
+    "imageOnly": "Image-only analyses",
+    "soilOnly": "Soil-only analyses",
+    "soilImage": "Soil + Image analyses"
+  },
+  "tabs": {
+    "imageOnly": "Images",
+    "soilOnly": "Soil",
+    "soilImage": "Soil + Image"
+  },
+  "detailsTitle": "Details",
+  "labels": {
+    "disease": "Disease",
+    "confidence": "Confidence",
+    "treatment": "Treatment",
+    "fertilizer": "Fertilizer",
+    "crop": "Crop",
+    "savedAt": "Saved at",
+    "updatedAt": "Updated at",
+    "recordId": "Record ID",
+    "userName": "User",
+    "userEmail": "Email"
+  },
+  "delete": "Delete",
+  "cancel": "Cancel",
+  "deleteTitle": "Delete item?",
+  "deleteConfirm": "This action cannot be undone.",
+  "deleteFailed": "Failed to delete item."
 }
-

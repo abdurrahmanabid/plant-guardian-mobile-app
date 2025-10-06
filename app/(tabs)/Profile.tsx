@@ -11,7 +11,7 @@ export default function Profile() {
   const { t } = useTranslation('profile')
   const router = useRouter()
   const { isLoggedIn, user, loading, error, logout, setUser, setError, setLoading } = useAuth()
-  
+
   const [refreshing, setRefreshing] = useState(false)
 
   const onSignIn = () => {
@@ -222,17 +222,37 @@ export default function Profile() {
                   >
                     <Text className="text-white font-medium">{t('profile.update')}</Text>
                   </Pressable>
-                   <Pressable
-                     onPress={async () => {
-                       await logout()
-                       setRefreshing(false)
-                     }}
-                     className="px-5 py-3 rounded-xl items-center"
-                     style={{ backgroundColor: '#1E90FF' }}
-                   >
-                     <Text className="text-white font-medium">{t('profile.logout')}</Text>
-                   </Pressable>
+                  <Pressable
+                    onPress={async () => {
+                      await logout()
+                      setRefreshing(false)
+                    }}
+                    className="px-5 py-3 rounded-xl items-center"
+                    style={{ backgroundColor: '#1E90FF' }}
+                  >
+                    <Text className="text-white font-medium">{t('profile.logout')}</Text>
+                  </Pressable>
                 </View>
+              </View>
+
+              {/* Quick Navigation */}
+              <View className="mt-4 gap-3">
+                <Pressable
+                  onPress={() => router.push('/(tabs)/Saved')}
+                  className="rounded-2xl p-4 border border-white/10"
+                  style={{ backgroundColor: '#0F0D23' }}
+                >
+                  <Text className="text-white text-lg font-semibold">{t('profile.links.saved.title')}</Text>
+                  <Text className="text-white/70 mt-1">{t('profile.links.saved.subtitle')}</Text>
+                </Pressable>
+                <Pressable
+                  onPress={() => router.push('/(tabs)/Search')}
+                  className="rounded-2xl p-4 border border-white/10"
+                  style={{ backgroundColor: '#0F0D23' }}
+                >
+                  <Text className="text-white text-lg font-semibold">{t('profile.links.search.title')}</Text>
+                  <Text className="text-white/70 mt-1">{t('profile.links.search.subtitle')}</Text>
+                </Pressable>
               </View>
             </View>
           )}
